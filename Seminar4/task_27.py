@@ -15,6 +15,7 @@ shells on the sea shore I'm sure that the shells are sea shore shells"""
 st.replace(".", " ").replace(";", " ").replace("'", " ").lower()
 print(st)
 sp = st.split()
+print(sp)
 mn = set(sp) 
 print(mn)
 print(len(mn))
