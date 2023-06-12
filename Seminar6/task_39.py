@@ -13,13 +13,13 @@
 N = int(input("Введите количество элементов в массиве N: "))
 first = []
 for i in range(N):
-    first.append(input(f"Введите {i} элемент множества: "))
+    first.append(input(f"Введите {i + 1} элемент множества: "))
 print(first)
 
 M = int(input("Введите количество элементов в массиве M: "))
 second = []
 for i in range(M):
-    second.append(input(f"Введите {i} элемент множества: "))
+    second.append(input(f"Введите {i + 1} элемент множества: "))
 print(second)
 
 unique_second = set(second)

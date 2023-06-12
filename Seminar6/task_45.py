@@ -20,7 +20,7 @@ k = int(input('Введите число k: '))
 
 def divider(x):
     summa = 0
-    for i in range(1 , x // + 1):
+    for i in range(1 , x // 2 + 1):
         if x % i == 0:
             summa += i
     return summa
