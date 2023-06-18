@@ -15,7 +15,7 @@
 # ; не должна быть линейной
 
 file_path = "file.txt"
-
+import re
 
 def show_all_records():
     with (open(file_path, 'r', encoding="utf-8")) as _data:
@@ -36,32 +36,36 @@ def add_contact(new_contact_fio, new_contact_number):
     with open("file.txt", "a", encoding="utf-8") as f:
         f.write("\n")
         f.write(new_contact_fio.replace(" "," "))
-        f.write(';')
+        f.write(' ')
         f.write(new_contact_number)
 
-def record_name(nameOld, nameNew, newNumber):
-    with open('file.txt', 'r') as f1, open('file.txt', 'w') as f2:
-        lines = f1.readlines()
+
+def record_name(contactOld, newName, newNumber):
+    with open('file.txt', "r", encoding="utf-8") as f: 
+        lines = f.readlines()
+    pattern = re.compile(re.escape(contactOld))
+    with open('file.txt', 'w', encoding="utf-8") as f:
         for line in lines:
-            line = line.strip()
-            if line == nameOld:
-                f2.write(nameNew)
-            else:
-                f2.write(line)
-    
-    
-    # with open ('file.txt', 'r') as f:
-    #      for line in f:
-    #         if old_name.lower() in line.split(";")[0].lower():
-    #             old_name = f.read()
-    #             new_name = old_name.replace(nameOld, nameNew)
-    # with open ('test.txt', 'w') as f:
-    #     f.write(new_name)
-    # # with open ('file.txt', 'r') as f:
-    # #     old_name = f.read()
-    # #     new_name = old_name.replace(nameOld, nameNew)
-    # # with open ('test.txt', 'w') as f:
-    # #     f.write(new_name)
+            result = pattern.search(line)
+            if result is None:
+                f.write(line)
+    with open("file.txt", "a", encoding="utf-8") as f:
+        f.write("\n")
+        f.write(newName.replace(" "," "))
+        f.write(' ')
+        f.write(newNumber)
+
+
+
+def delite_contact(contact):
+    with open('file.txt', "r", encoding="utf-8") as f: 
+        lines = f.readlines()
+    pattern = re.compile(re.escape(contact))
+    with open('file.txt', 'w', encoding="utf-8") as f:
+        for line in lines:
+            result = pattern.search(line)
+            if result is None:
+                f.write(line)
 
 
 def main():
@@ -80,11 +84,11 @@ def main():
         number = input("Введите Номер: ")
         add_contact(fio, number)
     elif select == 4:
-        nameOld = input("Введите ФИО искомого контакта через пробел: ")
-        nameNew = input("Введите измененные ФИО контакта: ")
-        newNumber = input("Введите новый номер контакта: ")
-        record_name(nameOld, nameNew, newNumber)
+        contactOld = input("Введите ФИО искомого контакта и телефон через пробел: ")
+        newName = input("Введите измененные ФИО контакта: ")
+        newNumber = input("Введите измененный номер контакта: ")
+        record_name(contactOld, newName, newNumber)
     elif select == 5:
-        name = input("Введите ФИО через пробел: ")
-        delite_name(name)
+        contact = str(input("Введите ФИО и номер телефона через пробел: "))
+        delite_contact(contact)
 main()
